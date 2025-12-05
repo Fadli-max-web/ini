@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masa Lalu yang Masih Aku Jaga</title>
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: "Poppins", sans-serif;
+    padding: 20px;
+    background: linear-gradient(135deg, #7f5af0, #2d5dcf);
+    color: white;
+    text-align: center;
+}
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: rgba(255,255,255,0.2);
+    padding: 10px;
+    width: 210px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    transition: 0.2s;
+}
+.card:hover { transform: translateY(-5px); }
+
+.card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    background: #ffdaff;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.btn:hover { background: #ffeaff; }
+
+#specialBtn {
+    padding: 12px 26px;
+    background: #ffdaff;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 30px;
+}
+#specialBtn:hover { background: #ffeaff; }
+
+/* Popup */
+.popup {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top:0; left:0;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.popup-content {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 15px;
+    color: black;
+    max-height: 90%;
+    overflow-y: auto;
+    animation: pop 0.3s ease;
+}
+@keyframes pop {
+    from { opacity: 0; transform: scale(0.7); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.popup img { width: 80%; height: 80%; border-radius: 10px; }
+
+.close {
+    margin-top: 10px;
+    padding: 10px;
+    background: crimson;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.close:hover { background: darkred; }
+</style>
+</head>
+<body>
+
+<h2>💜 FOTO KAMU 💙</h2>
+
+<div class="gallery">
+    <div class="card">
+        <img src="fto1.jpeg" data-caption="Foto ini, foto yang paling lucu menurut mas hehe.😚" onclick="openPopup(this)">
+        <button class="btn" onclick="openPopup(this.previousElementSibling)">Lihat</button>
+    </div>
+
+    <div class="card">
+        <img src="fto2.jpeg" data-caption="Ini selalu ngebuat inget saat kamu di sekolah yaang sering kita vc dulu.😊" onclick="openPopup(this)">
+        <button class="btn" onclick="openPopup(this.previousElementSibling)">Lihat</button>
+    </div>
+
+    <div class="card">
+        <img src="fto3.jpeg" data-caption="Dan ini foto yang ntah kenapa mas selalu inget dimana awal kita kenal dulu" onclick="openPopup(this)">
+        <button class="btn" onclick="openPopup(this.previousElementSibling)">Lihat</button>
+    </div>
+</div>
+
+<button id="specialBtn" onclick="openMessage()">Pesan Buat Kamu ✨</button>
+
+<!-- Popup Foto -->
+<div class="popup" id="popupFoto">
+    <div class="popup-content">
+        <img id="popupImg" src="">
+        <p id="popupCaption" style="margin-top:10px;font-size:17px;font-weight:500;"></p>
+        <button class="close" onclick="closePopup()">Tutup</button>
+    </div>
+</div>
+
+<!-- Popup Pesan -->
+<div class="popup" id="popupMsg">
+    <div class="popup-content">
+        <h3>Pesan untuk kamu 💌</h3>
+        <p style="margin-top:10px;font-size:17px;">
+            Mas mungkin sudah bukan siapa-siapa lagi buat kamu…  
+            tapi pernah jadi alasan kamu senyum sebentar,  
+            mas selalu sebenarnya kita kayak dulu awal kenal
+            tetapi sepertinya itu akan sulit terjadi atau bahkan ga terjadi lagi.
+            
+        </p>
+        <br></br>
+        <p>
+            Dimanapun kamu berada, jangan lupa jaga kesehatan kamu ya,
+            mas selalu ingin kamu sehat dan apapun masalahnya tetep kuat keep
+            strong, gapapa menyerah sesekali tapi bukan untuk down. 
+        </p>
+        <br></br>
+        <p>
+            Maaf kalau ada yang salah dari pesan ini, 
+            maaf kalau mas udah berbeda lagi kayak dulu,
+            maaf sebesar besarnya buat kamu.
+        </p>
+        <button class="close" onclick="closePopup()">Tutup</button>
+    </div>
+</div>
+
+<script>
+function openPopup(imgEl) {
+    let imgSrc = imgEl.getAttribute("src");
+    let imgCap = imgEl.getAttribute("data-caption");
+
+    document.getElementById("popupImg").src = imgSrc;
+    document.getElementById("popupCaption").innerText = imgCap;
+    document.getElementById("popupFoto").style.display = "flex";
+}
+
+function openMessage() {
+    document.getElementById("popupMsg").style.display = "flex";
+}
+
+function closePopup() {
+    document.getElementById("popupFoto").style.display = "none";
+    document.getElementById("popupMsg").style.display = "none";
+}
+</script>
+
+</body>
+</html>
